@@ -6,7 +6,7 @@ const complaintSchema = mongoose.Schema({
   person: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   status: { type: Number, default: 1 },
   genre: { type: String, required: true },
-  img: {type:String,required:true}
+  img: {type:String}
 });
 const Complaints = mongoose.model("Complaints", complaintSchema);
 module.exports = Complaints;

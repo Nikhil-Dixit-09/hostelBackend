@@ -31,5 +31,5 @@ router.get('/getComplaints/:email',auth,userController.getComplaints);
 router.post('/getComplaintsFilter',auth,userController.getComplaintsFilter);
 router.delete('/deleteComplain/:complain',auth,userController.deleteComplain);
 router.put('/upgradeStatus',auth,userController.upgradeStatus);
-router.put('/editComplaint',auth,upload.single('image'),userController.editComplaint);
+router.put('/editComplaint',auth,userController.editComplaint);
 module.exports = router;

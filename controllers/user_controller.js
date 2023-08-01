@@ -194,8 +194,10 @@ module.exports.changePassword = async function (req, res) {
 }
 module.exports.addComplaint = async function (req, res) {
     try {
-        console.log(req.body);
+        console.log('heyyyyyy');
+        console.log(req.body,'hiiiiiiiiiiiiiiiiiiiiiii');
         console.log(__dirname);
+        
         // let imag = {
         //     data: fs.readFileSync(path.join(__dirname, '../' + '/uploads/' + req.see)),
         //     contentType: 'image/png'
@@ -203,11 +205,12 @@ module.exports.addComplaint = async function (req, res) {
         // let save = imag.data.toString('base64');
         
         // fs.unlinkSync(path.join(__dirname, '../' + '/uploads/' + req.see));
-        console.log('hiii', 'aaaa');
-        console.log(req.userId);
-        await Complaints.create({ description: req.body.description, hostel: req.body.hostel, roomNumber: req.body.roomNumber, genre: req.body.genre,  person: req.userId });
+        // console.log('hiii', 'aaaa');
+        // console.log(req.userId);
+        await Complaints.create({ description: req.body.description, hostel: req.body.hostel, roomNumber: req.body.roomNumber, genre: req.body.genre,  person: req.userId,img:req.body.image });
         return res.status(200).json({ message: "success" });
     } catch (err) {
+        console.log(err);
         return res.status(200).json({data:err.message});
     }
 }
@@ -342,16 +345,17 @@ module.exports.editComplaint=async function(req,res){
         complaint.description=req.body.description;
         complaint.roomNumber=req.body.roomNumber;
         complaint.genre=req.body.genre;
-        if(req.see!==undefined){
-            let imag = {
-                data: fs.readFileSync(path.join(__dirname, '../' + '/uploads/' + req.see)),
-                contentType: 'image/png'
-            }
-            let sav = imag.data.toString('base64');
+        complaint.img=req.body.img;
+        // if(req.see!==undefined){
+        //     let imag = {
+        //         data: fs.readFileSync(path.join(__dirname, '../' + '/uploads/' + req.see)),
+        //         contentType: 'image/png'
+        //     }
+        //     let sav = imag.data.toString('base64');
             
-            fs.unlinkSync(path.join(__dirname, '../' + '/uploads/' + req.see));
-            complaint.img=sav;
-        }
+        //     fs.unlinkSync(path.join(__dirname, '../' + '/uploads/' + req.see));
+        //     complaint.img=sav;
+        // }
         complaint.save();
         return res.status(200).json({data:complaint});
     }catch(err){
