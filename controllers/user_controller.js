@@ -195,7 +195,6 @@ module.exports.changePassword = async function (req, res) {
 module.exports.addComplaint = async function (req, res) {
     try {
         console.log(req.body);
-
         console.log(__dirname);
         let imag = {
             data: fs.readFileSync(path.join(__dirname, '../' + '/uploads/' + req.see)),
@@ -209,7 +208,7 @@ module.exports.addComplaint = async function (req, res) {
         await Complaints.create({ description: req.body.description, hostel: req.body.hostel, roomNumber: req.body.roomNumber, genre: req.body.genre, img: save, person: req.userId });
         return res.status(200).json({ message: "success" });
     } catch (err) {
-        console.log(err);
+        return res.status(200).json({data:err.message});
     }
 }
 module.exports.getComplaints = async function (req, res) {
