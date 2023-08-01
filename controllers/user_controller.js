@@ -196,16 +196,16 @@ module.exports.addComplaint = async function (req, res) {
     try {
         console.log(req.body);
         console.log(__dirname);
-        let imag = {
-            data: fs.readFileSync(path.join(__dirname, '../' + '/uploads/' + req.see)),
-            contentType: 'image/png'
-        }
-        let save = imag.data.toString('base64');
+        // let imag = {
+        //     data: fs.readFileSync(path.join(__dirname, '../' + '/uploads/' + req.see)),
+        //     contentType: 'image/png'
+        // }
+        // let save = imag.data.toString('base64');
         
-        fs.unlinkSync(path.join(__dirname, '../' + '/uploads/' + req.see));
+        // fs.unlinkSync(path.join(__dirname, '../' + '/uploads/' + req.see));
         console.log('hiii', 'aaaa');
         console.log(req.userId);
-        await Complaints.create({ description: req.body.description, hostel: req.body.hostel, roomNumber: req.body.roomNumber, genre: req.body.genre, img: save, person: req.userId });
+        await Complaints.create({ description: req.body.description, hostel: req.body.hostel, roomNumber: req.body.roomNumber, genre: req.body.genre,  person: req.userId });
         return res.status(200).json({ message: "success" });
     } catch (err) {
         return res.status(200).json({data:err.message});
@@ -214,8 +214,13 @@ module.exports.addComplaint = async function (req, res) {
 module.exports.getComplaints = async function (req, res) {
     try {
         if (req.isStudent === true) {
+            console.log('hiiiiiiiiiiiiiiiiii')
+            const all=await Complaints.find();
+            console.log(all);
+            console.log(req.userId);
             const data = await Complaints.find({ person: req.userId });
             console.log('hii');
+            console.log(data);
             return res.status(200).json({ data: data });
         } else {
             const data = await Complaints.find();
@@ -232,6 +237,7 @@ module.exports.getComplaintsFilter = async function (req, res) {
     try {
         let see;
         if (req.isStudent === true) {
+            
             const complaints = await Complaints.find({ person: req.userId });
             see = complaints;
             console.log('asdfggghh');
