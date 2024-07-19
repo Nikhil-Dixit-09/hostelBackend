@@ -47,10 +47,12 @@ socketIO.on('connection', (socket) => {
 });
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
-app.use(cors({
-  origin: 'https://hostel-client-rouge.vercel.app'
-}));
+const corsOptions ={
+  origin:'https://hostel-client-rouge.vercel.app', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 app.use('/', router);
 const db = require('./config/mongoose');
 console.log('hi');
