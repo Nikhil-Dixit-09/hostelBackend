@@ -203,7 +203,6 @@ module.exports.addComplaint = async function (req, res) {
         //     contentType: 'image/png'
         // }
         // let save = imag.data.toString('base64');
-        
         // fs.unlinkSync(path.join(__dirname, '../' + '/uploads/' + req.see));
         // console.log('hiii', 'aaaa');
         // console.log(req.userId);
@@ -240,7 +239,6 @@ module.exports.getComplaintsFilter = async function (req, res) {
     try {
         let see;
         if (req.isStudent === true) {
-            
             const complaints = await Complaints.find({ person: req.userId });
             see = complaints;
             console.log('asdfggghh');
