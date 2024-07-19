@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: "nikhil09.dixit@gmail.com",
-        pass: "brimzbipyozdtlqz"
+        pass: "hsohtbpxkudzweef"
     }
 });
 var multer = require('multer');
